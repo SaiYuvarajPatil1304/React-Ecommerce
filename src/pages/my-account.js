@@ -1,0 +1,47 @@
+import { Layout } from '@components/Layout';
+import { ShoppingCartContext } from '../Context';
+import { useContext, useEffect, useState } from 'react';
+import Link from 'next/link';
+
+function MyAccount() {
+  const context = useContext(ShoppingCartContext);
+  const [userData, setUserData] = useState({});
+  const handleLogout = () => {
+    context.setLogged(false);
+    localStorage.setItem('logged', 'false');
+  };
+
+  useEffect(() => {
+    const parsedData = JSON.parse(localStorage.getItem('user-data'));
+    setUserData(parsedData);
+  }, []);
+
+  return (
+    <Layout>
+      {}
+      <h1 className="font-medium text-xl">My Account</h1>
+
+      {}
+      <div className="w-4/5 lg:w-2/4 flex flex-col text-sm font-normal mt-4 items-start border border-inherit rounded-lg px-8 py-4">
+        <p>Name</p>
+        {}
+        <p className="w-full font-light mb-4 rounded-lg bg-zinc-200 p-2 dark:bg-zinc-800 overflow-auto">{userData.name}</p>
+
+        <p>Email</p>
+        {}
+        <p className="w-full font-light mb-4 rounded-lg bg-zinc-200 p-2 dark:bg-zinc-800 overflow-auto">{userData.email}</p>
+
+        <p>Password</p>
+        {}
+        <p className="w-full font-light mb-4 rounded-lg bg-zinc-200 p-2 dark:bg-zinc-800 overflow-auto">{userData.password}</p>
+
+        {}
+        <Link href="/login" onClick={handleLogout} className="w-full">
+          <button className="font-semibold bg-black text-white p-3 rounded-lg w-full">Logout</button>
+        </Link>
+      </div>
+    </Layout>
+  );
+}
+
+export default MyAccount;
