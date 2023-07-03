@@ -11,7 +11,6 @@ function Navbar() {
   let email = '';
 
   const handleLogout = () => {
-    // Maneja el cierre de sesión
     context.setLogged(false);
     localStorage.setItem('logged', 'false');
     router.push('/login');
